@@ -9,13 +9,13 @@ import (
 	"github.com/klauspost/compress/zstd"
 )
 
-type SchemeAliyunDrive struct{}
+type Scheme struct{}
 
-func (SchemeAliyunDrive) Scheme() string {
+func (Scheme) Scheme() string {
 	return "aliyun_drive"
 }
 
-func (SchemeAliyunDrive) Path() string {
+func (Scheme) Path() string {
 	return path
 }
 

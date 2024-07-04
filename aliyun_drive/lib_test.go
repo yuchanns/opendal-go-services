@@ -12,7 +12,7 @@ func TestSchemeAliyunDrive(t *testing.T) {
 	t.Parallel()
 	assert := assert.New(t)
 
-	scheme := aliyun_drive.SchemeAliyunDrive{}
+	scheme := aliyun_drive.Scheme{}
 	assert.Equal(scheme.Scheme(), "aliyun_drive")
 	assert.NotEmpty(scheme.Path())
 	t.Logf("path: %s", scheme.Path())
