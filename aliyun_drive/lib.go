@@ -9,7 +9,7 @@ import (
 	"github.com/klauspost/compress/zstd"
 )
 
-var Scheme = &scheme{}
+var Scheme = scheme{}
 
 type scheme struct{}
 
