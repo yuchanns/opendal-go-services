@@ -2,25 +2,32 @@ package aliyun_drive
 
 import (
 	"fmt"
+	"sync"
 
 	services "github.com/yuchanns/opendal-go-services"
 )
 
-var Scheme = scheme{}
+var Scheme = scheme{once: &sync.Once{}}
 
-type scheme struct{}
+type scheme struct {
+	once *sync.Once
+}
 
 func (scheme) Scheme() string {
 	return "aliyun_drive"
 }
 
-func (scheme) Path() string {
-	return path
+func (s scheme) Path() (string, error) {
+	var err error
+	s.once.Do(func() {
+		err = load()
+	})
+	return path, err
 }
 
 var path string
 
-func init() {
+func load() error {
 	var (
 		err  error
 		data []byte
@@ -39,6 +46,7 @@ func init() {
 		}
 	}
 	if err != nil {
-		panic(fmt.Errorf("opendal/services/aliyun_drive: %s", err))
+		return fmt.Errorf("opendal/services/aliyun_drive: %s", err)
 	}
+	return nil
 }
