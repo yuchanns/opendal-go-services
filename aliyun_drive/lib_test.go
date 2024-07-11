@@ -12,9 +12,9 @@ func TestSchemeAliyunDrive(t *testing.T) {
 	t.Parallel()
 	assert := require.New(t)
 
-	assert.Equal(aliyun_drive.Scheme.Scheme(), "aliyun_drive")
-	path, err := aliyun_drive.Scheme.Path()
-	assert.Nil(err)
+	assert.Equal(aliyun_drive.Scheme.Name(), "aliyun_drive")
+	assert.Nil(aliyun_drive.Scheme.LoadOnce())
+	path := aliyun_drive.Scheme.Path()
 	assert.NotEmpty(path)
 	assert.Nil(os.Remove(path))
 }

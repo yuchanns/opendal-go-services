@@ -13,16 +13,20 @@ type scheme struct {
 	once *sync.Once
 }
 
-func (scheme) Scheme() string {
+func (scheme) Name() string {
 	return "aliyun_drive"
 }
 
-func (s scheme) Path() (string, error) {
+func (s scheme) Path() string {
+	return path
+}
+
+func (s scheme) LoadOnce() error {
 	var err error
 	s.once.Do(func() {
 		err = load()
 	})
-	return path, err
+	return err
 }
 
 var path string
